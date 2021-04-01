@@ -1,9 +1,12 @@
-function Song() {
+function Song(props) {
+  const { currentSong } = props;
+
   return (
     <div className="song-container">
-      <h2>Picture</h2>
-      <h2>Song</h2>
-      <h2>Artist</h2>
+      <img src={currentSong.cover} alt="Album Cover" />
+
+      <h2>{currentSong.name}</h2>
+      <h3>{currentSong.artist}</h3>
     </div>
   );
 }

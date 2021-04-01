@@ -7,12 +7,17 @@ import Song from "./components/Song";
 function App() {
   //State
   const [songs, setSongs] = useState(data());
-
+  const [currentSong, setCurrentSong] = useState(songs[0]);
+  const [isPlaying, setIsPlaying] = useState(false);
   return (
     <div className="App">
       <h1>Music Player</h1>
-      <Song />
-      <Player />
+      <Song currentSong={currentSong} />
+      <Player
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        audio={currentSong.audio}
+      />
     </div>
   );
 }
