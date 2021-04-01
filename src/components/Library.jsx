@@ -1,10 +1,17 @@
 import LibrarySong from "./LibrarySong";
 
 function Library(props) {
-  const { songs, setCurrentSong, audioRef, isPlaying, setSongs } = props;
+  const {
+    songs,
+    setCurrentSong,
+    audioRef,
+    isPlaying,
+    setSongs,
+    libraryStatus,
+  } = props;
 
   return (
-    <div className="library">
+    <div className={`library ${libraryStatus ? "active-library" : ""}`}>
       <h2>Library</h2>
       <div className="library-songs">
         {songs[0]
