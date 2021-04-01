@@ -72,15 +72,7 @@ const songList = () => {
       id: uuidv4(),
       active: false,
     },
-    {
-      name: "Sunrise Hike",
-      cover: "",
-      artist: "Ruck P",
-      audio: "",
-      color: [],
-      id: uuidv4(),
-      active: false,
-    },
+
     {
       name: "Tell Me",
       cover:
