@@ -7,7 +7,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useEffect } from "react";
-import { playAudio } from "../util";
 
 function Player(props) {
   //Props
@@ -52,14 +51,14 @@ function Player(props) {
     setSongInfo({ ...songInfo, current: e.target.value });
   };
 
-  const skipTrackHandler = (direction) => {
+  const skipTrackHandler = async (direction) => {
     let currentIndex = songs.findIndex((song) => currentSong.id === song.id);
-    return (
-      direction === "skip-forward"
-        ? setCurrentSong(songs[currentIndex + 1] || songs[0])
-        : setCurrentSong(songs[currentIndex - 1] || songs[songs.length - 1]),
-      playAudio(isPlaying, audioRef)
-    );
+
+    (await (direction === "skip-forward"))
+      ? setCurrentSong(songs[currentIndex + 1] || songs[0])
+      : setCurrentSong(songs[currentIndex - 1] || songs[songs.length - 1]);
+
+    return isPlaying ? audioRef.current.play() : null;
   };
 
   const getTime = (time) => {

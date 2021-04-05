@@ -1,12 +1,10 @@
-import { playAudio } from "../util";
-
 function LibrarySong(props) {
   // Props
   const { song, setCurrentSong, audioRef, isPlaying, songs, setSongs } = props;
   //Functions
 
-  const songSelectHandler = () => {
-    setCurrentSong(song);
+  const songSelectHandler = async () => {
+    await setCurrentSong(song);
     //Add Active State
     const newSongs = songs.map((s) => {
       if (s === song) {
@@ -16,8 +14,8 @@ function LibrarySong(props) {
       }
     });
 
-    setSongs(newSongs);
-    playAudio(isPlaying, audioRef);
+    await setSongs(newSongs);
+    return isPlaying ? audioRef.current.play() : null;
   };
 
   return (
