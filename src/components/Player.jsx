@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useEffect } from "react";
+import { playAudio } from "../util";
 
 function Player(props) {
   //Props
@@ -53,9 +54,12 @@ function Player(props) {
 
   const skipTrackHandler = (direction) => {
     let currentIndex = songs.findIndex((song) => currentSong.id === song.id);
-    return direction === "skip-forward"
-      ? setCurrentSong(songs[currentIndex + 1] || songs[0])
-      : setCurrentSong(songs[currentIndex - 1] || songs[songs.length - 1]);
+    return (
+      direction === "skip-forward"
+        ? setCurrentSong(songs[currentIndex + 1] || songs[0])
+        : setCurrentSong(songs[currentIndex - 1] || songs[songs.length - 1]),
+      playAudio(isPlaying, audioRef)
+    );
   };
 
   const getTime = (time) => {
@@ -76,7 +80,7 @@ function Player(props) {
           onChange={dragHandler}
           type="range"
         />
-        <p>{getTime(songInfo.duration)} </p>
+        <p>{songInfo.duration ? getTime(songInfo.duration) : "0:00"} </p>
       </div>
       <div className="play-control">
         <FontAwesomeIcon
